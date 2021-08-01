@@ -1,10 +1,15 @@
 import tkinter as tk
 import requests
 import time
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
 
 def getWeather(canvas):
     city = textfield.get()
-    api = "https://api.openweathermap.org/data/2.5/weather?q=" + city +"&appid=4da5d6148b3c942d614273c9fc50b1e3"
+    api = "https://api.openweathermap.org/data/2.5/weather?q=" + city +"&appid={API_KEY}"
     json_data = requests.get(api).json()
     condition = json_data['weather'][0]['main']
     temp = int(json_data['main']['temp'] - 273.15)
